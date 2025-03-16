@@ -11,13 +11,13 @@ const Header = () => {
   
 
     return (
-        <div className="bg-gradient-to-b from-[#a8ede3c6] py-7">
-            <nav className="navbar max-w-[1450px] mx-auto">
+        <div className="bg-gradient-to-b from-[#93ede0c6] py-7">
+            <nav className="navbar max-w-[1450px] mx-auto w-11/12 lg:w-full">
                 {/* Navbar Start (Logo and Mobile Menu) */}
-                <div className="navbar-start">
+                <div className="navbar-start gap-3">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                        <div tabIndex={0} role="button" className=" lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                         </div>
                         <ul
                             tabIndex={0}
@@ -79,7 +79,7 @@ const Header = () => {
                             <NavLink className="px-3 py-2 rounded-lg text-lg text-gray-700" to="/" > Home</NavLink>
                         </li>
                         <li>
-                             <NavLink className="px-3 py-2 rounded-lg text-lg text-gray-700" to="/all-visas"  >All Visas </NavLink>
+                             <NavLink className="px-3 py-2 rounded-lg text-lg text-gray-700" to="/all-visas" >All Visas </NavLink>
                         </li>
                         <li>
                             <NavLink className="px-3 py-2 rounded-lg text-lg text-gray-700" to="/add-visa"  >Add Visa </NavLink>
@@ -124,7 +124,7 @@ const Header = () => {
                             {/* Login Button */}
                             <Link to="/login">
                                 <button
-                                    className="border-2 border-[#0DC1AD] text-[#0DC1AD] font-bold px-5 py-2 rounded-lg transition duration-300 hover:text-white"
+                                    className="border-2 border-[#0DC1AD] text-[#0DC1AD] font-bold px-3 md:px-5 py-2 rounded-lg transition duration-300 hover:text-white"
                                 >
                                     Login
                                 </button>
@@ -132,7 +132,7 @@ const Header = () => {
 
                             {/* Register Button */}
                             <Link to="/register">
-                                <button className="border-2 border-[#0DC1AD] text-[#0DC1AD] font-bold px-5 py-2 rounded-lg transition duration-300 hover:text-white">
+                                <button className="border-2 border-[#0DC1AD] text-[#0DC1AD] font-bold px-3 md:px-5 py-2 rounded-lg transition duration-300 hover:text-white">
                                     Register
                                 </button>
                             </Link>

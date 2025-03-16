@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // For navigation
+import { Link, useLocation, useNavigate } from "react-router-dom"; // For navigation
 import { AuthContext } from "../contextData/AuthProvider";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion"; // For animations
@@ -9,7 +9,8 @@ const Register = () => {
     const navigate = useNavigate();
     const [passwordError, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(true);
-
+    const location = useLocation();
+    console.log(location)
     // console.log(updateUser)
 
     const handleRegister = (e) => {
@@ -38,7 +39,7 @@ const Register = () => {
                 console.log('from create new user', result.user)
                 updateUser(profile)
                     .then(() => {
-                        navigate("/")
+                        navigate(location?.state?.from || "/");
                     }).catch((error) => {
                         toast.error(error.message.replace("Firebase: ", ""));
 
@@ -53,14 +54,13 @@ const Register = () => {
     const loginGoogle = () => {
         loginWIthGoogle()
             .then((result) => {
-                // navigate("/")
+                navigate(location?.state?.from || "/");
                 console.log(result.user)
             })
             .catch((error) => {
                 toast.error(error.code.replace("auth/", "").replace(/-/g, ' '));
             });
     }
-
 
     return (
         <motion.div
@@ -191,7 +191,7 @@ const Register = () => {
                                 type="submit"
                                 className="relative cursor-pointer inline-flex items-center justify-center w-full px-5 py-3 text-white font-semibold tracking-[1.2px] bg-[#40B3A2] rounded shadow-lg hover:opacity-95 overflow-hidden">
                                 <span className="absolute w-4 h-4 bg-transparent rounded-full top-1/2 left-3 -translate-y-1/2 animate-[ripple_0.6s_linear_infinite]"></span>
-                                Button
+                                Register Now
                                 <span className="absolute w-4 h-4 bg-transparent rounded-full right-3 top-1/2 -translate-y-1/2 animate-[ripple_0.6s_linear_infinite]"></span>
                             </button>
                         </form>

@@ -1,6 +1,6 @@
 import { FaFacebook, FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion"; // For animations
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contextData/AuthProvider";
 import { toast } from "react-toastify";
@@ -9,7 +9,8 @@ const Login = () => {
     const { loginUser, loginWIthGoogle } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(true);
     const [error, setLoginError] = useState("");
-
+    const location = useLocation();
+    console.log(location.state)
     const handleForm = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -26,7 +27,7 @@ const Login = () => {
         loginUser(email, password)
             .then(() => {
                 // Signed in 
-                navigate(location?.state ? location.state : "/")
+                navigate(location?.state?.from || "/");
                 // ...
             })
             .catch((error) => {
@@ -38,7 +39,7 @@ const Login = () => {
     const loginGoogle = () => {
         loginWIthGoogle()
             .then((result) => {
-                // navigate(location?.state ? location.state : "/")
+                navigate(location?.state?.from || "/");
                 console.log(result.user)
             })
             .catch((error) => {
@@ -53,7 +54,7 @@ const Login = () => {
         >
 
             <div className="flex items-center justify-center">
-                <div className="border-[#d9efec93] border-3 rounded-3xl shadow-lg p-8 w-[450px]">
+                <div className="border-[#d9efec93] my-10 border-3 rounded-3xl shadow-lg p-8 w-[450px]">
                     {/* Header */}
                     <div className="mb-7">
                         <h3 className="text-2xl font-bold text-[#0D9C8A] text-center">Sign In</h3>
@@ -141,7 +142,7 @@ const Login = () => {
                     <div className="mt-7 text-center text-gray-500 text-sm">
                         <p className="text-gray-500">
                             Don't have an account?{" "}
-                            <Link to="/register" className="text-[#0DC1AD] hover:underline">
+                            <Link state={location.state} to="/register" className="text-[#0DC1AD] hover:underline">
                                 Register
                             </Link>
                         </p>
