@@ -184,3 +184,6 @@ const MyApplications = () => {
 export default MyApplications;
 
 
+git add .
+git commit -m"added the delte visa functianlity"
+git push
