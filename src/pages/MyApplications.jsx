@@ -185,5 +185,5 @@ export default MyApplications;
 
 
 git add .
-git commit -m"added the delte visa functianlity"
+git commit -m"added the visa applications section"
 git push
