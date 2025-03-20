@@ -3,10 +3,11 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import bgPngForm from '../assets/hero_bg.png';
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import '../pages/addButton.css'
+import { AuthContext } from "../contextData/AuthProvider";
 const AddVisa = () => {
-
+    const { user } = useContext(AuthContext);
     const [showGallery, setShowGallery] = useState(false);
 
     // Hosted country images on ImgBB
@@ -57,7 +58,7 @@ const AddVisa = () => {
 
         // Create an object with the form data
         const formData = {
-            countryImage, countryName, visaType, processingTime, requiredDocuments, description, ageRestriction, fee, validity, applicationMethod,
+            email: user.email, countryImage, countryName, visaType, processingTime, requiredDocuments, description, ageRestriction, fee, validity, applicationMethod,
         };
 
         // Simulate form submission (replace with actual API call)
@@ -76,7 +77,7 @@ const AddVisa = () => {
                 }
             })
         console.log("Form Data:", formData);
-       
+
 
     };
 
