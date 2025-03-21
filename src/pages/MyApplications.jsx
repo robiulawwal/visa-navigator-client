@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contextData/AuthProvider";
 import { toast } from "react-toastify";
@@ -7,18 +7,36 @@ import Swal from "sweetalert2";
 
 const MyApplications = () => {
   const { user } = useContext(AuthContext);
-  const [applications, setApplications] = useState([]);
+  const [applications, setApplications] = useState([]); // All applications
+  const [filteredApplications, setFilteredApplications] = useState([]); // Filtered applications
+  const [searchQuery, setSearchQuery] = useState(""); // Search query
 
   // Fetch visa applications for the logged-in user
   useEffect(() => {
-
-      fetch(`http://localhost:5000/my-applications?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setApplications(data))
-        .catch((error) => {
-          console.error("Error fetching applications:", error);
-        });
+    fetch(`http://localhost:5000/my-applications?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setApplications(data); // Set all applications
+        setFilteredApplications(data); // Initially, show all applications
+      })
+      .catch(() => {
+        toast.error("Failed to fetch visa applications. Please try again.");
+      });
   }, [user]);
+
+  // Handle search functionality
+  const handleSearch = () => {
+    if (searchQuery.trim() === "") {
+      // If the search query is empty, show all applications
+      setFilteredApplications(applications);
+    } else {
+      // Filter applications based on the country name
+      const filtered = applications.filter((app) =>
+        app.countryName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredApplications(filtered);
+    }
+  };
 
   // Handle cancel application
   const handleCancelApplication = (applicationId) => {
@@ -43,38 +61,58 @@ const MyApplications = () => {
                 (app) => app._id !== applicationId
               );
               setApplications(updatedApplications);
+              setFilteredApplications(updatedApplications); // Update filtered list
               Swal.fire({
                 title: "Canceled!",
                 text: "Your visa application has been canceled.",
                 icon: "success",
               });
             } else {
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Failed to cancel the application. Please try again.",
-              });
+              toast.error("Failed to cancel the application. Please try again.");
             }
+          })
+          .catch(() => {
+            toast.error("An error occurred. Please try again.");
           });
       }
     });
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#F0F4F8] to-[#E0F2F1] min-h-screen py-12">
+    <div className="bg-base-200 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Heading */}
         <h1 className="text-4xl font-bold text-[#0D9C8A] text-center mb-12">
           My Visa Applications
         </h1>
 
+        {/* Search Bar */}
+        <div className="max-w-md mx-auto mb-12">
+          <div className="flex items-center bg-white rounded-lg shadow-md overflow-hidden">
+            <input
+              type="text"
+              placeholder="Search by country name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSearch()} // Trigger search on Enter
+              className="w-full p-3 outline-none focus:ring-2 focus:ring-[#0D9C8A] bg-base-100"
+            />
+            <button
+              onClick={handleSearch}
+              className="px-6 py-3 bg-gradient-to-r from-[#0D9C8A] to-[#0DC1AD] text-white font-semibold hover:from-[#0DC1AD] hover:bg-accent"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+
         {/* Applications Grid */}
-        {applications.length > 0 ? (
+        {filteredApplications.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {applications.map((application) => (
+            {filteredApplications.map((application) => (
               <div
                 key={application._id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+                className=" rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
               >
                 {/* Country Image */}
                 <img
@@ -84,53 +122,53 @@ const MyApplications = () => {
                 />
 
                 {/* Application Details */}
-                <div className="p-6">
+                <div className="p-6 bg-gradient-to-b bg-base-200">
                   {/* Country Name and Visa Type */}
-                  <h2 className="text-2xl font-bold text-[#0D9C8A] mb-4">
+                  <h2 className="text-2xl font-bold text-[#1F2937] mb-4">
                     {application.countryName}
                   </h2>
                   <p className="text-gray-600 mb-2">
-                    <span className="font-semibold">Visa Type:</span>{" "}
-                    {application.visaType}
+                    <span className="font-semibold text-[#4B5563]">Visa Type:</span>{" "}
+                    <span className="text-[#6B46C1]">{application.visaType}</span>
                   </p>
 
                   {/* Processing Time and Fee */}
                   <div className="flex justify-between mb-2">
                     <p className="text-gray-600">
-                      <span className="font-semibold">Processing Time:</span>{" "}
-                      {application.processingTime}
+                      <span className="font-semibold text-[#4B5563]">Processing Time:</span>{" "}
+                      <span className="text-[#10B981]">{application.processingTime}</span>
                     </p>
                     <p className="text-gray-600">
-                      <span className="font-semibold">Fee:</span> $
-                      {application.fee}
+                      <span className="font-semibold text-[#4B5563]">Fee:</span>{" "}
+                      <span className="text-[#EF4444]">${application.fee}</span>
                     </p>
                   </div>
 
                   {/* Validity and Application Method */}
                   <div className="flex justify-between mb-2">
                     <p className="text-gray-600">
-                      <span className="font-semibold">Validity:</span>{" "}
-                      {application.validity}
+                      <span className="font-semibold text-[#4B5563]">Validity:</span>{" "}
+                      <span className="text-[#3B82F6]">{application.validity}</span>
                     </p>
                     <p className="text-gray-600">
-                      <span className="font-semibold">Method:</span>{" "}
-                      {application.applicationMethod}
+                      <span className="font-semibold text-[#4B5563]">Method:</span>{" "}
+                      <span className="text-[#F59E0B]">{application.applicationMethod}</span>
                     </p>
                   </div>
 
                   {/* Applicant Details */}
                   <div className="mb-4">
                     <p className="text-gray-600">
-                      <span className="font-semibold">Applicant:</span>{" "}
-                      {application.firstName} {application.lastName}
+                      <span className="font-semibold text-[#4B5563]">Applicant:</span>{" "}
+                      <span className="text-[#9333EA]">{application.firstName} {application.lastName}</span>
                     </p>
-                    <p className="text-gray-600">
-                      <span className="font-semibold">Email:</span>{" "}
-                      {application.email}
+                    <p className="text-gray-600 mt-2">
+                      <span className="font-semibold text-[#4B5563]">Email:</span>{" "}
+                      <span className="text-[#3B82F6]">{application.email}</span>
                     </p>
-                    <p className="text-gray-600">
-                      <span className="font-semibold">Applied Date:</span>{" "}
-                      {application.appliedDate}
+                    <p className="text-gray-600 mt-2">
+                      <span className="font-semibold text-[#4B5563]">Applied Date:</span>{" "}
+                      <span className="text-[#10B981]">{application.appliedDate}</span>
                     </p>
                   </div>
 
@@ -148,25 +186,18 @@ const MyApplications = () => {
         ) : (
           // Empty State
           <div className="text-center">
-            <svg
-              className="w-40 h-40 mx-auto mb-6 text-[#9CA3AF]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/7486/7486747.png"
+              alt="No Data"
+              className="w-40 h-40 mb-4 mx-auto"
+            />
             <h2 className="text-3xl font-bold text-[#4B5563] mb-4">
               No Applications Found
             </h2>
             <p className="text-gray-500 text-lg mb-6">
-              You haven't applied for any visas yet. Start your journey today!
+              {searchQuery.trim() === ""
+                ? "You haven't applied for any visas yet. Start your journey today!"
+                : `No applications found for "${searchQuery}".`}
             </p>
             <Link
               to="/all-visas"
@@ -182,8 +213,3 @@ const MyApplications = () => {
 };
 
 export default MyApplications;
-
-
-git add .
-git commit -m"added the visa applications section"
-git push

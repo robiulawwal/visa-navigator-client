@@ -10,8 +10,6 @@ const Register = () => {
     const [passwordError, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(true);
     const location = useLocation();
-    console.log(location)
-    // console.log(updateUser)
 
     const handleRegister = (e) => {
         let regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
@@ -33,10 +31,10 @@ const Register = () => {
             displayName: name,
             photoURL: photo
         }
-        console.log(name, photo, email, password)
+        // console.log(name, photo, email, password)
         createNewUser(email, password)
-            .then((result) => {
-                console.log('from create new user', result.user)
+            .then(() => {
+                // console.log('from create new user', result.user)
                 updateUser(profile)
                     .then(() => {
                         navigate(location?.state?.from || "/");
@@ -53,9 +51,9 @@ const Register = () => {
 
     const loginGoogle = () => {
         loginWIthGoogle()
-            .then((result) => {
+            .then(() => {
                 navigate(location?.state?.from || "/");
-                console.log(result.user)
+                // console.log(result.user)
             })
             .catch((error) => {
                 toast.error(error.code.replace("auth/", "").replace(/-/g, ' '));

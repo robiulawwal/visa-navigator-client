@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useLoaderData, useNavigate, useNavigation } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contextData/AuthProvider";
 import { toast } from "react-toastify";
 
 const VisaDetails = () => {
-    const navigate = useNavigation();
     const visa = useLoaderData();
     const { _id, ...copiedVisa } = visa;
     const { user } = useContext(AuthContext);
@@ -44,7 +43,6 @@ const VisaDetails = () => {
             ...formData,
             ...copiedVisa,
         };
-        console.log(applicationData)
         // Submit application data to the server
         fetch("http://localhost:5000/visa-applications", {
             method: "POST",
@@ -55,7 +53,6 @@ const VisaDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.insertedId) {
                         toast.success("Visa application submitted successfully!");
                         setIsModalOpen(false); // Close modal

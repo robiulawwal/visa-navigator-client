@@ -114,14 +114,14 @@ const MyVisas = () => {
 
     if (visas.length > 0) {
         return (
-            <div className="bg-gradient-to-b from-[#F4F3F0] to-[#E0F2F1] min-h-screen py-12">
+            <div className="py-12 bg-base-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h1 className="text-4xl font-bold text-[#0D9C8A] text-center mb-12">My Added Visas</h1>
 
                     {/* Visa Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {visas.map((visa) => (
-                            <div key={visa._id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div key={visa._id} className="backdrop-sepia-100 rounded-lg shadow-lg overflow-hidden">
                                 {/* Visa Image */}
                                 <img
                                     src={visa.countryImage}
@@ -132,11 +132,11 @@ const MyVisas = () => {
                                 {/* Visa Details */}
                                 <div className="p-6">
                                     <h2 className="text-2xl font-bold text-[#0D9C8A] mb-4">{visa.countryName}</h2>
-                                    <p className="text-gray-600 mb-2"><span className="font-semibold">Visa Type:</span> {visa.visaType}</p>
-                                    <p className="text-gray-600 mb-2"><span className="font-semibold">Processing Time:</span> {visa.processingTime}</p>
-                                    <p className="text-gray-600 mb-2"><span className="font-semibold">Fee:</span> ${visa.fee}</p>
-                                    <p className="text-gray-600 mb-2"><span className="font-semibold">Validity:</span> {visa.validity}</p>
-                                    <p className="text-gray-600 mb-4"><span className="font-semibold">Application Method:</span> {visa.applicationMethod}</p>
+                                    <p className="text-base-content mb-2"><span className="font-semibold">Visa Type:</span> {visa.visaType}</p>
+                                    <p className="text-base-content mb-2"><span className="font-semibold">Processing Time:</span> {visa.processingTime}</p>
+                                    <p className="text-base-content mb-2"><span className="font-semibold">Fee:</span> ${visa.fee}</p>
+                                    <p className="text-base-content mb-2"><span className="font-semibold">Validity:</span> {visa.validity}</p>
+                                    <p className="text-base-content mb-4"><span className="font-semibold">Application Method:</span> {visa.applicationMethod}</p>
 
                                     {/* Buttons */}
                                     <div className="flex gap-4">

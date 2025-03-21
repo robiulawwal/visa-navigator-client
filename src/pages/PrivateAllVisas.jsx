@@ -4,10 +4,8 @@ import { Navigate, useLocation, } from 'react-router-dom';
 
 const PrivateAllVisas = ({children}) => {
     const {user,loader} =useContext(AuthContext)
-    console.log(children)
     
     const location = useLocation()
-    console.log(location)
     if (loader) {
         return <div className="flex items-center"> <span className="loading loading-spinner w-23 mx-auto text-accent"></span>
         </div>

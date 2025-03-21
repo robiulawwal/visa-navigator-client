@@ -81,25 +81,26 @@ const LatestVisas = () => {
             </div>
 
             {/* Extra Section 1 - Styled as per the given image */}
-            <div className="bg-gray-100 py-12">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
-                    <img src={passportPng} alt="Passport" className="w-2/3 md:w-1/3 object-contain" />
-                    <div className="md:w-2/3 md:pl-8">
-                        <h2 className="text-3xl font-bold mb-4 text-gray-800">Choose Your Destination</h2>
-                        <div className="grid grid-cols-2 gap-2 md:gap-6">
-                            {[{ name: "Australia", flag: australiaPng }, { name: "Germany", flag: germanyPng }, { name: "England", flag: englandPng }, { name: "Dubai", flag: dubaiPng }].map((country) => (
-                                <div key={country.name} className="flex items-center justify-between border-2 p-4 rounded-lg border-gray-200 gap-2 backdrop-blur-sm bg-white/30">
-                                    <div className="flex items-center space-x-3">
-                                        <img className="w-8 md:w-20" src={country.flag} alt="" />
-                                        <h3 className="text-lg font-semibold text-gray-800">{country.name}</h3>
-                                    </div>
-                                    <FaArrowRight className="text-gray-400 md:text-2xl" />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+            <div className="bg-base-200 py-12">
+  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+    <img src={passportPng} alt="Passport" className="w-2/3 md:w-1/3 object-contain" />
+    <div className="md:w-2/3 md:pl-8">
+      <h2 className="text-3xl font-bold mb-4 text-base-content">Choose Your Destination</h2>
+      <div className="grid grid-cols-2 gap-2 md:gap-6">
+        {[{ name: "Australia", flag: australiaPng }, { name: "Germany", flag: germanyPng }, { name: "England", flag: englandPng }, { name: "Dubai", flag: dubaiPng }].map((country) => (
+          <div key={country.name} className="flex items-center justify-between border-2 p-4 rounded-lg border-base-300 gap-2 backdrop-blur-sm bg-base-100/30">
+            <div className="flex items-center space-x-3">
+              <img className="w-8 md:w-20" src={country.flag} alt="" />
+              <h3 className="text-lg font-semibold text-base-content">{country.name}</h3>
             </div>
+            <FaArrowRight className="text-base-content/50 md:text-2xl" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
     );
 };

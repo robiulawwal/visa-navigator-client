@@ -10,7 +10,6 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(true);
     const [error, setLoginError] = useState("");
     const location = useLocation();
-    console.log(location.state)
     const handleForm = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -38,9 +37,8 @@ const Login = () => {
 
     const loginGoogle = () => {
         loginWIthGoogle()
-            .then((result) => {
+            .then(() => {
                 navigate(location?.state?.from || "/");
-                console.log(result.user)
             })
             .catch((error) => {
                 toast.error(error.message.split('(')[1].split(')')[0])

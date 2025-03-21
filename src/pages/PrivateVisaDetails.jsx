@@ -6,7 +6,6 @@ const PrivateVisaDetails = ({children}) => {
     const {user,loader} =useContext(AuthContext)
     
     const location = useLocation()
-    console.log(location)
     if (loader) {
         return <div className="flex items-center"> <span className="loading loading-spinner w-23 mx-auto text-accent"></span>
         </div>

@@ -71,19 +71,19 @@ const AddVisa = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.insertedId) {
                     toast.success("Visa added successfully!");
                 }
             })
-        console.log("Form Data:", formData);
+        // console.log("Form Data:", formData);
 
 
     };
 
     return (
         <div style={{ backgroundImage: `url(${bgPngForm})` }} className="mt-8 md:pt-8 mb-4 md:mb-0 md:pb-4 bg-repeat-round bg-auto">
-            <div className="max-w-[1100px] mx-auto rounded-sm px-8 md:px-12 py-6 md:py-12 bg-[#F4F3F0]">
+            <div className="max-w-[1100px] mx-auto rounded-sm px-8 md:px-12 py-6 md:py-12 bg-base-300">
                 <h2 className="text-5xl text-[#0D9C8A] font-bold text-center mb-2 font-rancho">
                     Add New Visa Details
                 </h2>
