@@ -67,7 +67,6 @@ const Register = () => {
             transition={{ duration: 0.8 }}
         >
             <div className="flex flex-col items-center">
-                {/* Right Pane: Registration Form */}
                 <div className="w-full lg:w-1/2 flex items-center justify-center my-5">
                     <div className="w-full p-10 bg-gradient-to-b border-2 border-emerald-200 from-emerald-50 via-purple-100  to-pink-100 rounded-lg shadow-emerald-100 shadow-2xl">
                         {/* Title */}
