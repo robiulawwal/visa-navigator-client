@@ -1,6 +1,5 @@
 import { FaGlobe, FaFileAlt, FaClock, FaCheckCircle, FaInfoCircle, FaUser, FaDollarSign, FaCalendarAlt, FaUpload, FaRegCopy, FaRegArrowAltCircleUp, FaArrowDown, } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-
 import bgPngForm from '../assets/hero_bg.png';
 import { toast } from "react-toastify";
 import { useContext, useState } from "react";
