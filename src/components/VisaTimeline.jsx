@@ -72,7 +72,7 @@ const VisaTimeline = () => {
                   {step.title}
                 </p>
 
-                {/* Step Description */}
+                {/* Step Descriptions */}
                 {activeStep === index && (
                   <div className="absolute z-10 top-22 w-48 p-4 bg-base-100 rounded-lg shadow-lg text-sm text-base-content ">
                     {step.description}
