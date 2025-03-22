@@ -6,7 +6,6 @@ import '../components/theme.css'
 const Header = () => {
   const { user, logOutUser } = useContext(AuthContext);
 
-  // Simulate login/logout functionality
   // State for handling the light/dark theme
   const [isDarkMode, setIsDarkMode] = useState(false);
 
