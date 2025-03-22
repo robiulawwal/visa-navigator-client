@@ -44,7 +44,7 @@ const VisaDetails = () => {
             ...copiedVisa,
         };
         // Submit application data to the server
-        fetch("http://localhost:5000/visa-applications", {
+        fetch("https://visa-navigator-server-rose-beta.vercel.app/visa-applications", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -14,7 +14,7 @@ const MyVisas = () => {
     // Fetch visas added by the logged-in user
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/my-added-visas?email=${user.email}`)
+            fetch(`https://visa-navigator-server-rose-beta.vercel.app/my-added-visas?email=${user.email}`)
                 .then((res) => res.json())
                 .then((data) => setVisas(data));
         }
@@ -36,7 +36,7 @@ const MyVisas = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/my-visas/${visaId}`, {
+                fetch(`https://visa-navigator-server-rose-beta.vercel.app/my-visas/${visaId}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())
@@ -85,7 +85,7 @@ const MyVisas = () => {
             ageRestriction: e.target.ageRestriction.value,
         };
 
-        fetch(`http://localhost:5000/update-visa/${selectedVisa._id}`, {
+        fetch(`https://visa-navigator-server-rose-beta.vercel.app/update-visa/${selectedVisa._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

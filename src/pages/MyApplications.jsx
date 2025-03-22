@@ -13,7 +13,7 @@ const MyApplications = () => {
 
   // Fetch visa applications for the logged-in user
   useEffect(() => {
-    fetch(`http://localhost:5000/my-applications?email=${user.email}`)
+    fetch(`https://visa-navigator-server-rose-beta.vercel.app/my-applications?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setApplications(data); // Set all applications
@@ -50,7 +50,7 @@ const MyApplications = () => {
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/visa-applications/${applicationId}?email=${user.email}`, {
+        fetch(`https://visa-navigator-server-rose-beta.vercel.app/visa-applications/${applicationId}?email=${user.email}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

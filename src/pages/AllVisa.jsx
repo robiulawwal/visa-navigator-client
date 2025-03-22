@@ -13,6 +13,7 @@ const AllVisa = () => {
         window.scrollTo(0, 0); // Scroll to the top of the page
     }, []);
 
+
     // Hardcoded visa types
     const visaTypes = ["Tourist Visa", "Student Visa", "Official Visa"];
 
@@ -62,6 +63,16 @@ const AllVisa = () => {
 
                 {/* Visa Cards Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 lg:gap-6">
+                    {
+                        loaderVisas.length < 1 &&
+                        <div className=" col-span-3 py-10 flex items-center justify-center bg-gradient-to-b from-[#F4F3F0] to-[#E0F2F1]">
+                            <div className="text-center">
+                                {/* Loading Spinner */}
+                                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#0D9C8A] border-opacity-50 mx-auto"></div>
+                                <p className="mt-8 text-lg text-[#0D9C8A] font-semibold">Loading visas...</p>
+                            </div>
+                        </div>
+                    }
                     {filteredVisas.length > 0 ? (
                         filteredVisas.map((visa) => (
                             <motion.div

@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
 import ErrorPage from "../components/ErrorPage";
 import MainLayout from "../layouts/MainLayout";
 import Login from "../components/Login";
@@ -36,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/all-visas',
                 element: <PrivateAllVisas><AllVisa></AllVisa></PrivateAllVisas>,
-                loader: () => fetch('http://localhost:5000/visas')
+                loader: () => fetch('https://visa-navigator-server-rose-beta.vercel.app/visas')
             },
             {
                 path: '/add-visa',
@@ -46,12 +45,12 @@ const router = createBrowserRouter([
             {
                 path: '/visa-details/:id',
                 element: <PrivateVisaDetails><VisaDetails></VisaDetails></PrivateVisaDetails>,
-                loader:({params})=>fetch(`http://localhost:5000/visa-details/${params.id}`)
+                loader:({params})=>fetch(`https://visa-navigator-server-rose-beta.vercel.app/visa-details/${params.id}`)
             },
             {
                 path: '/my-visas',
                 element: <PrivateMyVisas><MyVisas></MyVisas></PrivateMyVisas>,
-                loader: () => fetch('http://localhost:5000/visas')
+                loader: () => fetch('https://visa-navigator-server-rose-beta.vercel.app/visas')
             },
             {
                 path: '/my-applications',

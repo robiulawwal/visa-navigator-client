@@ -62,7 +62,7 @@ const AddVisa = () => {
         };
 
         // Simulate form submission (replace with actual API call)
-        fetch('http://localhost:5000/visas', {
+        fetch('https://visa-navigator-server-rose-beta.vercel.app/visas', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
