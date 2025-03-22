@@ -14,10 +14,8 @@ const AllVisa = () => {
     }, []);
 
 
-    // Hardcoded visa types
     const visaTypes = ["Tourist Visa", "Student Visa", "Official Visa"];
 
-    // Handle filter change
     const handleFilterChange = (e) => {
         const selectedType = e.target.value;
         setSelectedVisaType(selectedType);
